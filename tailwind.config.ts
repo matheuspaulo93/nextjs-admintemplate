@@ -16,5 +16,10 @@ const config: Config = {
     },
   },
   plugins: [],
+  darkMode: 'class',
+  safelist: [
+    {pattern: /^h-/},
+    {pattern: /^w-/}
+  ]
 }
 export default config
