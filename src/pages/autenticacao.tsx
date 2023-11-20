@@ -17,13 +17,21 @@ export default function Autenticacao() {
         setTimeout(() => setErro(null), tempoEmSegundos * 1000);
     }
 
-    function submit() {
-        if (modo === 'login') {
-            console.log('login');
-            exibirErro("Ocorreu um erro no login!")
-        } else {
-            console.log('cadastrar');
-            exibirErro("Ocorreu um erro no cadastro!")
+    async function submit() {
+        try {
+            if (modo === 'login') {
+                await authContext.login(email, senha);
+            } else {
+                await authContext.cadastrar(email, senha);
+            }
+        } catch(e: any) {
+            console.log(e);
+            if(e?.message?.startsWith('{')) {
+                const messageObj = JSON.parse(e?.message);
+                exibirErro(messageObj.error.message);
+            } else {
+                exibirErro(e?.message ?? 'Erro inesperado!', 10);
+            }
         }
     }
 
