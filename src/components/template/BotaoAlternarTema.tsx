@@ -1,7 +1,7 @@
 import { IconeMoon, IconeSun } from "../icons"
 
 type BotaoAlternarTemaProps = {
-    tema: string,
+    tema: string | undefined | null,
     alternarTema: () => void
 }
 
